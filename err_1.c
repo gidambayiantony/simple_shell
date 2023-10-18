@@ -86,7 +86,7 @@ int print_d(int input, int fd)
 }
 
 /**
- * convert_number - clone of itoa
+ * convert_number - Clone of itoa
  * @num: the num
  * @base: the base
  * @flags: the arg flags
