@@ -12,22 +12,22 @@
 #include <string.h>
 #include <sys/types.h>
 
-/* for convert_number() */
+
 #define CONVERT_LOWERCASE       1
 #define CONVERT_UNSIGNED        2
 
-/* 1 if using system getline() */
+
 #define USE_GETLINE 0
 #define USE_STRTOK 0
 
 #define HIST_FILE       ".simple_shell_history"
 #define HIST_MAX        4096
-/* for read/write buffers */
+
 #define READ_BUF_SIZE 1024
 #define WRITE_BUF_SIZE 1024
 #define BUF_FLUSH -1
 
-/* for command chaining */
+
 #define CMD_NORM        0
 #define CMD_OR          1
 #define CMD_AND         2
@@ -37,11 +37,12 @@ extern char **environ;
 
 
 /**
- * struct liststr - singly linked list
- * @num:  number field
- * @str: a string
- * @next: ptr to the next node
+ * struct liststr - Definition of a singly linked list node
+ * @num: Integer field within the node
+ * @str: A character string contained in the node
+ * @next: Pointer to the next node in the list
  */
+
 typedef struct liststr
 {
         int num;
@@ -50,27 +51,28 @@ typedef struct liststr
 } list_t;
 
 /**
- * struct passinfo -  pseudo-arg to pass into a function,
- * allowing uniform prototype for function ptr struct
- * @arg: a string generated from getline containing arguements
- * @argv:an array of strings generated from arg
- * @path: a string path for  current command
- * @argc: arg cnt
- * @line_count:  error count
- * @err_num: error code for exit()s
- * @linecount_flag: if on count this line of input
- * @fname:  program filename
- * @env: linked list local copy of environ
- * @environ  modified copy of environ from LL env
- * @history: hist node
- * @alias: alias node
- * @env_changed: on if environ was changed
- * @status: the return status of  last exec'd command
- * @cmd_buf: address of ptr to cmd_buf, on if chaining
- * * @cmd_buf_type: CMD_type ||, &&, ;
- * @readfd: the fd from which to read line input
- * @histcount: history line number cnt
+ * struct passinfo - Pseudo-argument for passing data into a function,
+ * allowing a uniform prototype for a function pointer structure
+ * @arg: A string generated from getline containing arguments
+ * @argv: An array of strings generated from the argument
+ * @path: A string representing the current command's path
+ * @argc: Argument count
+ * @line_count: Error count
+ * @err_num: Error code for exit()
+ * @linecount_flag: If set, count this line of input
+ * @fname: Program filename
+ * @env: Linked list, local copy of the environment variables
+ * @environ: Modified copy of environment variables from the linked list 'env'
+ * @history: History node
+ * @alias: Alias node
+ * @env_changed: Set to '1' if the environment was changed
+ * @status: The return status of the last executed command
+ * @cmd_buf: Address of a pointer to cmd_buf, set to '1' if chaining
+ * @cmd_buf_type: CMD_type (||, &&, ;)
+ * @readfd: The file descriptor from which to read line input
+ * @histcount: History line number count
  */
+
 typedef struct passinfo
 {
         char *arg;
@@ -88,22 +90,23 @@ typedef struct passinfo
         int env_changed;
         int status;
 
-        char **cmd_buf; /* ptr to cmd ; chain buffer, for memory mangement */
-        int cmd_buf_type; /* CMD_type ||, &&, ; */
-        int readfd;
+        char **cmd_buf;
+        int cmd_buf_type;
+        int readuv;
         int histcount;
 } info_t;
 
 #define INFO_INIT \
-{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+{NULL, NULL, NULL, 0 , 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
                 0, 0, 0}
 
 
 /**
- * struct builtin -  a builtin string and related function
- * @type: builtin command flag
- * @func:  function
+ * struct builtin - Structure representing a built-in command and its related function
+ * @type: Flag indicating the built-in command type
+ * @func: Pointer to the associated function
  */
+
 typedef struct builtin
 {
 	 char *type;
@@ -235,5 +238,3 @@ int _setenv(info_t *, char *, char *);
 
 
 #endif
-
-
