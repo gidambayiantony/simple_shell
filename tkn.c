@@ -1,93 +1,94 @@
 #include "code.h"
 /**
- * **strtow - Splts strng into wrds
- * @str: Strn inp
- * @q: String Deli
- * Return: Ptr to  array of strngs, else NULL in fail
+ * **strtow - duplicates string into words
+ * @str: str input
+ * @d: Str Del
+ * Return: Ptr to  array of strings, else NULL on failure
  */
 
-char **strtow(char *str, char *q)
+char **strtow(char *str, char *d)
 {
-	int x, y, w, r, numwords = 0;
-	char **t;
+	int x, y, q, o, numwords = 0;
+	char **s;
 
 	if (str == NULL || str[0] == 0)
 		return (NULL);
-	if (!q)
-		q = " ";
+	if (!d)
+		d = " ";
 	for (x = 0; str[x] != '\0'; x++)
-		if (!is_delim(str[x], q) && (is_delim(str[x + 1], q) || !str[x + 1]))
+		if (!is_delim(str[x], d) && (is_delim(str[x + 1], d) || !str[x + 1]))
 			numwords++;
 
 	if (numwords == 0)
 		return (NULL);
-	t = malloc((1 + numwords) * sizeof(char *));
-	if (!t)
+	s = malloc((1 + numwords) * sizeof(char *));
+	if (!s)
 		return (NULL);
-	for (x = 0, y = 0; y < numwords; y++)
+	for (y = 0, y = 0; y < numwords; y++)
 	{
-		while (is_delim(str[y], q))
+		while (is_delim(str[x], d))
 			x++;
-		w = 0;
-		while (!is_delim(str[y + x], q) && str[y + w])
-			w++;
-		t[y] = malloc((w + 1) * sizeof(char));
-		if (!t[x])
+		q = 0;
+		while (!is_delim(str[x + q], d) && str[x + q])
+		q++;
+		s[y] = malloc((q + 1) * sizeof(char));
+		if (!s[y])
 		{
-			for (w = 0; w < x; w++)
-				free(t[w]);
-			free(t);
+			for (q = 0; q < x; q++)
+				free(s[q]);
+			free(s);
 			return (NULL);
 		}
-		for (r = 0; r < w; r++)
-			t[x][r] = str[x++];
-		t[x][r] = 0;
+		for (o = 0; o < q; o++)
+			s[x][o] = str[y++];
+		s[y][o] = 0;
 	}
-	t[x] = NULL;
-	return (t);
+	s[y] = NULL;
+	return (s);
 }
 
 /**
- * **strtow2 - Splt stn int word
- * @str: String Input
- * @v: Delim
- * Return: Ptr array strings, else NULL in fail
+ * **strtow2 - deplicates string into words
+ * @str: Str Input
+ * @d: Delim
+ * Return: P to  array of str, else NULL on failure
  */
-char **strtow2(char *str, char v)
+char **strtow2(char *str, char d)
 {
-	int q, w, e, r, numwords = 0;
-	char **p;
+	int h, l, q, o, numwords = 0;
+	char **s;
 
 	if (str == NULL || str[0] == 0)
 		return (NULL);
-	for (q = 0; str[q] != '\0'; q++)
-		if ((str[q] != v && str[q + 1] == v) ||
-				    (str[q] != v && !str[q + 1]) || str[q + 1] == v)
+	for (h = 0; str[h] != '\0'; h++)
+		if ((str[h] != d && str[h + 1] == d) ||
+				    (str[h] != d && !str[h + 1]) || str[h + 1] == d)
 			numwords++;
 	if (numwords == 0)
 		return (NULL);
-	p = malloc((1 + numwords) * sizeof(char *));
-	if (!p)
+	s = malloc((1 + numwords) * sizeof(char *));
+	if (!s)
 		return (NULL);
-	for (q = 0, w = 0; w < numwords; w++)
+	for (h = 0, l = 0; l < numwords; l++)
 	{
-		while (str[q] == v && str[q] != v)
+		while (str[h] == d && str[h] != d)
+			h++;
+		q = 0;
+		while (str[h + q] != d && str[h + q] && str[h + q] != d)
 			q++;
-		e = 0;
-		while (str[q + e] != v && str[q + e] && str[q + e] != v)
-			e++;
-		p[w] = malloc((e + 1) * sizeof(char));
-		if (!p[w])
+		s[l] = malloc((q + 1) * sizeof(char));
+		if (!s[l])
 		{
-			for (e = 0; e < w; e++)
-				free(p[e]);
-			free(p);
+			for (q = 0; q < l; q++)
+				free(s[q]);
+			free(s);
 			return (NULL);
 		}
-		for (r = 0; r < e; r++)
-			p[w][r] = str[q++];
-		p[w][r] = 0;
-	}	
-	p[w] = NULL;
-	return (p);
+		for (o = 0; o < q; o++)
+			s[l][o] = str[h++];
+		s[l][o] = 0;
+	}
+	s[l] = NULL;
+	return (s);
 }
+
