@@ -1,78 +1,74 @@
 #include "code.h"
 
 /**
- * _strncpy - Copy 'n' characters from 'src' to 'dest'.
+ * _strncpy - Copy string.
  * @dest: Destination string to copy to.
- * @src: Source string.
- * @n: Number of characters to copy.
- *
- * Return: Pointer to the concatenated string.
+ * @src: String source.
+ * @n: Amount of characters to copy.
+ * Return: Concatenated string.
  */
 char *_strncpy(char *dest, char *src, int n)
 {
-    int h, v;
-    char *s = dest;
+	int h, k;
+	char *s = dest;
 
-    h = 0;
-    while (src[h] != '\0' && h < n - 1)
-    {
-        dest[h] = src[h];
-        h++;
-    }
-    if (h < n)
-    {
-        v = h;
-        while (v < n)
-        {
-            dest[v] = '\0';
-            v++;
-        }
-    }
-    return (s);
+	h = 0;
+	while (src[h] != '\0' && h < n - 1)
+	{
+		dest[h] = src[h];
+		h++;
+	}
+	if (h < n)
+	{
+		k = h;
+		while (k < n)
+		{
+			dest[k] = '\0';
+			k++;
+		}
+	}
+	return (s);
 }
 
 /**
- * _strncat - Concatenate 'n' characters from 'src' to 'dest'.
+ * _strncat - Concatenates two strings.
  * @dest: First string.
  * @src: Second string.
- * @n: Number of bytes to maximally use.
- *
- * Return: Pointer to the concatenated string.
+ * @n: Amount of bytes to maximally use.
+ * Return: Concatenated string.
  */
 char *_strncat(char *dest, char *src, int n)
 {
-    int z, v;
-    char *s = dest;
+	int x, k;
+	char *s = dest;
 
-    z = 0;
-    v = 0;
-    while (dest[z] != '\0')
-        z++;
-    while (src[v] != '\0' && v < n)
-    {
-        dest[z] = src[v];
-        z++;
-        v++;
-    }
-    if (v < n)
-        dest[z] = '\0';
-    return (s);
+	x = 0;
+	k = 0;
+	while (dest[x] != '\0')
+		x++;
+	while (src[k] != '\0' && k < n)
+	{
+		dest[x] = src[k];
+		x++;
+		k++;
+	}
+	if (k < n)
+		dest[x] = '\0';
+	return (s);
 }
 
 /**
- * _strchr - Locate a character 'c' in the string 's'.
+ * _strchr - Locate a character in the string.
  * @s: String to be parsed.
- * @c: Character to find.
- *
- * Return: Pointer to the memory location or NULL if not found.
+ * @c: Character to look for.
+ * Return: (s) a pointer to the memory area s.
  */
 char *_strchr(char *s, char c)
 {
-    do
-    {
-        if (*s == c)
-            return (s);
-    } while (*s++ != '\0');
+	do {
+		if (*s == c)
+			return (s);
+	} while (*s++ != '\0');
 
-    return (NULL);
+	return (NULL);
 }

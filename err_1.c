@@ -1,24 +1,23 @@
 #include "code.h"
 
 /**
- * _erratoi - string to int
- * @s: str .
- * Return: no num return 0 , converted no otherwise
- *       return -1 on error
+ * _erratoi - Convert string to int.
+ * @s: String to convert.
+ * Return: 0 if no numbers, the converted number otherwise, -1 on error.
  */
 int _erratoi(char *s)
 {
-	int h = 0;
+	int i = 0;
 	unsigned long int result = 0;
 
 	if (*s == '+')
 		s++;  /* TODO: why does this make main return 255? */
-	for (h = 0;  s[h] != '\0'; h++)
+	for (i = 0;  s[i] != '\0'; i++)
 	{
-		if (s[h] >= '0' && s[h] <= '9')
+		if (s[i] >= '0' && s[i] <= '9')
 		{
 			result *= 10;
-			result += (s[h] - '0');
+			result += (s[i] - '0');
 			if (result > INT_MAX)
 				return (-1);
 		}
@@ -29,11 +28,10 @@ int _erratoi(char *s)
 }
 
 /**
- * print_error -output error messages
- * @info: parameter & return info struct
- * @estr: string having specified type of errors
- * Return: no no 0, converted number otherwise
- *        return -1 on error
+ * print_error - Print error messages.
+ * @info: Parameter & return info struct.
+ * @estr: String contains specified type of errors.
+ * Return: No numbers return 0, the converted number otherwise, -1 on error.
  */
 void print_error(info_t *info, char *estr)
 {
@@ -47,16 +45,15 @@ void print_error(info_t *info, char *estr)
 }
 
 /**
- * print_d - fuctn print decimals (integer) num (base 10)
- * @input: input
- * @fd: filedescriptor  write on
- *
- * Return: number of char printed
+ * print_d - Function to print decimal (integer) number (base 10).
+ * @input: Input.
+ * @fd: File descriptor to write on.
+ * Return: Number of characters printed.
  */
 int print_d(int input, int fd)
 {
 	int (*__putchar)(char) = _putchar;
-	int h, count = 0;
+	int i, count = 0;
 	unsigned int _abs_, current;
 
 	if (fd == STDERR_FILENO)
@@ -70,14 +67,14 @@ int print_d(int input, int fd)
 	else
 		_abs_ = input;
 	current = _abs_;
-	for (h = 1000000000; h > 1; h /= 10)
+	for (i = 1000000000; i > 1; i /= 10)
 	{
-		if (_abs_ / h)
+		if (_abs_ / i)
 		{
-			__putchar('0' + current / h);
+			__putchar('0' + current / i);
 			count++;
 		}
-		current %= h;
+		current %= i;
 	}
 	__putchar('0' + current);
 	count++;
@@ -86,12 +83,11 @@ int print_d(int input, int fd)
 }
 
 /**
- * convert_number - function, clone of itoa
- * @num: no
- * @base: base
- * @flags: arg flags
- *
- * Return: string
+ * convert_number - Converter function, clone of itoa.
+ * @num: Number.
+ * @base: Base.
+ * @flags: Argument flags.
+ * Return: String.
  */
 char *convert_number(long int num, int base, int flags)
 {
@@ -105,7 +101,6 @@ char *convert_number(long int num, int base, int flags)
 	{
 		n = -num;
 		sign = '-';
-
 	}
 	array = flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
 	ptr = &buffer[49];
@@ -122,10 +117,9 @@ char *convert_number(long int num, int base, int flags)
 }
 
 /**
- * remove_comments - functn replace first instance of '#' with '\0'
- * @buf: str address modify
- *
- * Return:  0 Success;
+ * remove_comments - Function to replace the first instance of '#' with '\0'.
+ * @buf: String address to modify.
+ * Return: Always 0 Success.
  */
 void remove_comments(char *buf)
 {

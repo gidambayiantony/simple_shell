@@ -1,8 +1,8 @@
 #include "code.h"
 
 /**
- * clear_info - Clears info_t struct.
- * @info: Pointer to the structure to clear.
+ * clear_info - Initialize the info_t struct.
+ * @info: Structure address.
  */
 void clear_info(info_t *info)
 {
@@ -13,8 +13,8 @@ void clear_info(info_t *info)
 }
 
 /**
- * set_info - Initializes info_t struct.
- * @info: Pointer to the structure to initialize.
+ * set_info - Initialize the info_t struct.
+ * @info: Structure address.
  * @av: Argument vector.
  */
 void set_info(info_t *info, char **av)
@@ -44,9 +44,9 @@ void set_info(info_t *info, char **av)
 }
 
 /**
- * free_info - Clears info_t struct fields.
- * @info: Ptr  the structure to free.
- * @all: Freeing all fields if set to 1.
+ * free_info - Free info_t struct fields.
+ * @info: Structure address.
+ * @all: True to free all fields.
  */
 void free_info(info_t *info, int all)
 {
@@ -66,8 +66,8 @@ void free_info(info_t *info, int all)
 		ffree(info->environ);
 		info->environ = NULL;
 		bfree((void **)info->cmd_buf);
-		if (info->readuv > 2)
-			close(info->readuv);
+		if (info->readfd > 2)
+			close(info->readfd);
 		_putchar(BUF_FLUSH);
 	}
 }
