@@ -1,10 +1,10 @@
 #include "code.h"
 /**
- * is_cmd - file is  executable command
- * @info: Inf Strct
- * @path: File
+ * is_cmd - gets whether if file is  executable command
+ * @info: Info Structure
+ * @path: File Path
  *
- * Return: in success 1, in else 0
+ * Return: On success 1, else 0
  */
 int is_cmd(info_t *info, char *path)
 {
@@ -22,36 +22,36 @@ int is_cmd(info_t *info, char *path)
 }
 
 /**
- * dup_chars - Dup Char
- * @pathstr: Strng path
- * @start:  Index
- * @stop: Index
+ * dup_chars - Duplicates and splits Characters
+ * @pathstr: Str path
+ * @start: Start Index
+ * @stop: Stop Index
  *
- * Return: Buffer next ptr
+ * Return: Buff new ptr
  */
 char *dup_chars(char *pathstr, int start, int stop)
 {
 	static char buf[1024];
-	int c = 0, o = 0;
+	int y = 0, u = 0;
 
-	for (o = 0, c = start; c < stop; c++)
-		if (pathstr[c] != ':')
-			buf[o++] = pathstr[c];
-	buf[o] = 0;
+	for (u = 0, y = start; y < stop; y++)
+		if (pathstr[y] != ':')
+			buf[u++] = pathstr[y];
+	buf[u] = 0;
 	return (buf);
 }
 
 /**
- * find_path - cmd the string path
- * @info: Inf Strct
- * @pathstr: Strin Path
- * @cmd: to find
+ * find_path - Finds cmd  string path
+ * @info: Info Structure
+ * @pathstr: Str Path
+ * @cmd: cmd to find
  *
- * Return: if found or NULL
+ * Return: cmd path if found or NULL
  */
 char *find_path(info_t *info, char *pathstr, char *cmd)
 {
-	int c = 0, curr_pos = 0;
+	int y = 0, curr_pos = 0;
 	char *path;
 
 	if (!pathstr)
@@ -63,9 +63,9 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 	}
 	while (1)
 	{
-		if (!pathstr[c] || pathstr[c] == ':')
+		if (!pathstr[y] || pathstr[y] == ':')
 		{
-			path = dup_chars(pathstr, curr_pos, c);
+			path = dup_chars(pathstr, curr_pos, y);
 			if (!*path)
 				_strcat(path, cmd);
 			else
@@ -75,11 +75,13 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 			}
 			if (is_cmd(info, path))
 				return (path);
-			if (!pathstr[c])
+			if (!pathstr[y])
 				break;
-			curr_pos = c;
+			curr_pos = y;
 		}
-		c++;
+		y++;
 	}
 	return (NULL);
 }
+
+
