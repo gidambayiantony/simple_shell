@@ -12,39 +12,37 @@
 #include <fcntl.h>
 #include <errno.h>
 
-// Buffer Sizes
+
 #define READ_BUF_SIZE 1024
 #define WRITE_BUF_SIZE 1024
 #define BUF_FLUSH -1
 
-// Command Types
+
 #define CMD_NORM 0
 #define CMD_OR 1
 #define CMD_AND 2
 #define CMD_CHAIN 3
 
-// Convert Number Flags
 #define CONVERT_LOWERCASE 1
 #define CONVERT_UNSIGNED 2
 
-// Configuration Flags
 #define USE_GETLINE 0
 #define USE_STRTOK 0
 
-// History Configuration
+
 #define HIST_FILE ".simple_shell_history"
 #define HIST_MAX 4096
 
 extern char **environ;
 
-// Data Structure for Linked List
+
 typedef struct liststr {
     int num;
     char *str;
     struct liststr *next;
 } list_t;
 
-// Data Structure for Storing Information
+
 typedef struct passinfo {
     char *arg;
     char **argv;
@@ -66,16 +64,16 @@ typedef struct passinfo {
     int histcount;
 } info_t;
 
-// Initializer for info_t
+/* Initializer for info_t */
 #define INFO_INIT {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0}
 
-// Data Structure for Builtin Commands
+
 typedef struct builtin {
     char *type;
     int (*func)(info_t *);
 } builtin_table;
 
-// Function Prototypes
+
 int hsh(info_t *, char **);
 int find_builtin(info_t *);
 void find_cmd(info_t *);
